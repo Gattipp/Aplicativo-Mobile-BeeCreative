@@ -13,24 +13,23 @@ class DrawingCanvas extends StatefulWidget {
 }
 
 class _DrawingCanvasState extends State<DrawingCanvas> {
-  final GlobalKey _canvasKey = GlobalKey(); // Capturar a imagem e a cor
+  final GlobalKey _canvasKey = GlobalKey(); // Capturar a imagem e extrair a cor (Conta-gotas)
   
   // Estado atual dos desenhos
-  List<DrawingElement> _elements = [];
-  DrawingElement? _currentElement;
+  List<DrawingElement> _elements = []; //Já foi desenhado
+  DrawingElement? _currentElement; //Sendo desenhado "agora"
   
   // Histórico para Undo e Redo
-  final List<List<DrawingElement>> _undoHistory = [];
-  final List<List<DrawingElement>> _redoHistory = [];
+  final List<List<DrawingElement>> _undoHistory = []; //Função desfazer
+  final List<List<DrawingElement>> _redoHistory = []; //Função refazer
   
-  Color _selectedColor = Colors.black;
-  double _strokeWidth = 5.0;
+  Color _selectedColor = Colors.black; //Cor padrão 
+  double _strokeWidth = 5.0; //Espessura padrão
   
-  // Ferramenta Ativa
-  ToolType _activeTool = ToolType.brush;
+  ToolType _activeTool = ToolType.brush; //Ferramenta padrão
 
   void _onPanStart(DragStartDetails details) {
-    if (_activeTool == ToolType.eyedropper) {
+    if (_activeTool == ToolType.eyedropper) { //Para de "rabistar" para o conta-gotas ler o pixel selecionado
       _pickColor(details.localPosition);
       return;
     }
