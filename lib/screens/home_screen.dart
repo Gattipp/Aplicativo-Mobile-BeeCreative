@@ -8,9 +8,9 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Container(
-        width: double.infinity,
-        height: double.infinity,
-        decoration: const BoxDecoration(
+        width: double.infinity, //Ocupa a largura disponivel na tela
+        height: double.infinity, //Ocupa a altura disponivel na tela
+        decoration: const BoxDecoration( //Fundo degrade 
           gradient: LinearGradient(
             begin: Alignment.topCenter,
             end: Alignment.bottomCenter,
@@ -20,13 +20,13 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
         ),
-        child: SafeArea(
+        child: SafeArea( //Garante que o conteudo não vai ficar escondido
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24.0, vertical: 40.0),
             child: Column(
-              mainAxisAlignment: MainAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center, //Centraliza na vertical
               children: [
-                const Spacer(flex: 3),
+                const Spacer(flex: 3), //Espaçamento
 
                 //Logo
                 Center(
@@ -37,7 +37,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
 
-                const Spacer(flex: 3),
+                const Spacer(flex: 3), //Espaçamento proporcinal entre logo e botão
 
                 //Botão Criar
                 SizedBox(
@@ -63,7 +63,7 @@ class HomeScreen extends StatelessWidget {
                         letterSpacing: 0.8,
                       ),
                     ),
-                    onPressed: () {
+                    onPressed: () { //Ao aperta o botão, será redirecionado para a tela de desenho 
                       Navigator.push(
                         context,
                         MaterialPageRoute(
@@ -74,7 +74,7 @@ class HomeScreen extends StatelessWidget {
                   ),
                 ),
                 
-                const Spacer(flex: 1),
+                const Spacer(flex: 1), //Espaçamento
               ],
             ),
           ),
