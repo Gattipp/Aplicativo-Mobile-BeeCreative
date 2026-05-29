@@ -16,7 +16,7 @@ Future<Color?> pickColor({
     
     if (boundary == null) return null;
 
-    // Converte a renderização em uma imagem de pixels
+    // Converte renderização em uma imagem de pixels
     ui.Image image = await boundary.toImage();
     final ByteData? byteData = await image.toByteData(format: ui.ImageByteFormat.rawRgba);
     

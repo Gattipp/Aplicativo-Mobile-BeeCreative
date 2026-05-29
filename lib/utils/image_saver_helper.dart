@@ -4,7 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:gal/gal.dart';
-import 'package:path_provider/path_provider.dart'; //Ajuda a achar pastas temporárias no celular
+import 'package:path_provider/path_provider.dart';//Ajuda a achar pastas temporárias no celular
 
 // Função pra capturar o canvas e salvar na galeria do dispositivo
 Future<void> saveCanvasToDevice({
@@ -32,8 +32,7 @@ Future<void> saveCanvasToDevice({
     // Converte os bytes em Uint8List
     final Uint8List pngBytes = byteData.buffer.asUint8List();
 
-    // 5. CRIAÇÃO DO ARQUIVO TEMPORÁRIO (A mágica para resolver o erro do seu print):
-    // Pega o diretório temporário do sistema operacional (Android/iOS)
+    // Pega o diretório temporário do sistema
     final directory = await getTemporaryDirectory();
     // Define um nome único usando o timestamp atual para não sobrepor arquivos
     final String filePath = '${directory.path}/drawing_${DateTime.now().millisecondsSinceEpoch}.png';
@@ -42,10 +41,10 @@ Future<void> saveCanvasToDevice({
     // Grava os bytes brutos dentro do arquivo temporário criado
     await file.writeAsBytes(pngBytes);
 
-    // 6. Agora passamos a STRING do caminho ('filePath') que o Gal exige! 🚀
+    // Agora passamos a STRING do caminho ('filePath') que o Gal exige
     await Gal.putImage(filePath);
 
-    // 7. Avisa o usuário que deu certo!
+    // Avisa o usuário que deu certo
     if (context.mounted) {
       ScaffoldMessenger.of(context).showSnackBar(
         const SnackBar(

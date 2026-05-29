@@ -1,7 +1,4 @@
-// import 'dart:ui' as ui;
-// import 'dart:typed_data';
 import 'package:flutter/material.dart';
-// import 'package:flutter/rendering.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 import '../models/drawing_point.dart';
 import '../widgets/drawing_painter.dart';
@@ -17,11 +14,11 @@ class DrawingCanvas extends StatefulWidget {
 }
 
 class _DrawingCanvasState extends State<DrawingCanvas> {
-  final GlobalKey _canvasKey = GlobalKey(); // Capturar a imagem e extrair a cor (Conta-gotas)
+  final GlobalKey _canvasKey = GlobalKey(); // Capturar a imagem e extrair a cor (conta gotas)
   
   // Estado atual dos desenhos
   List<DrawingElement> _elements = []; //Já foi desenhado
-  DrawingElement? _currentElement; //Sendo desenhado "agora"
+  DrawingElement? _currentElement; //Sendo desenhado agora
   
   // Histórico para Undo e Redo
   final List<List<DrawingElement>> _undoHistory = []; //Função desfazer
@@ -32,11 +29,10 @@ class _DrawingCanvasState extends State<DrawingCanvas> {
   
   ToolType _activeTool = ToolType.brush; //Ferramenta padrão
 
-  bool _isDarkMode = false;
+  bool _isDarkMode = false; //Estado do modo escuro
 
   void _onPanStart(DragStartDetails details) async {
     if (_activeTool == ToolType.eyedropper) { 
-      // 🛠️ Nova chamada do helper modificado:
       final Color? detectedColor = await pickColor(
         position: details.localPosition,
         canvasKey: _canvasKey,
@@ -144,7 +140,7 @@ class _DrawingCanvasState extends State<DrawingCanvas> {
     );
   }
 
-  // Cores dinâmicas para o layout
+  // Cores dinâmicas pro layout
   Color get _backgroundColor => _isDarkMode ? const Color(0xFF1E1E1E) : Colors.grey[100]!;
   Color get _canvasColor => _isDarkMode ? const Color(0xFF2D2D2D) : Colors.white;
   Color get _appBarColor => _isDarkMode ? const Color(0xFF121212) : const Color(0xFFFFF3B0);
@@ -153,10 +149,10 @@ class _DrawingCanvasState extends State<DrawingCanvas> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: _backgroundColor, // 🎨 Cor de fundo dinâmica
+      backgroundColor: _backgroundColor, //Cor de fundo dinâmica para modo claro/escuro
       appBar: AppBar(
         title: const Text('BeeCreative', style: TextStyle(fontWeight: FontWeight.bold)),
-        backgroundColor: _appBarColor, // 🎨 Cor da AppBar dinâmica
+        backgroundColor: _appBarColor, // Cor da AppBar dinâmica pra modo claro/escuro
         foregroundColor: _appBarTextColor,
         elevation: 0,
         actions: [
@@ -211,7 +207,7 @@ class _DrawingCanvasState extends State<DrawingCanvas> {
               padding: const EdgeInsets.all(16.0),
               child: Container(
                 decoration: BoxDecoration(
-                  color: _canvasColor, // 🎨 Cor dinâmica da borda/fundo externa
+                  color: _canvasColor, // Cor dinâmica da borda/fundo externa
                   borderRadius: BorderRadius.circular(20),
                   boxShadow: [
                     BoxShadow(
@@ -245,7 +241,7 @@ class _DrawingCanvasState extends State<DrawingCanvas> {
                     child: RepaintBoundary(
                       key: _canvasKey,
                       child: Container(
-                        color: _canvasColor, // 🎨 Cor da folha de desenho dinâmica!
+                        color: _canvasColor, // Cor dinâmica da folha de desenho
                         child: CustomPaint(
                           painter: DrawingPainter(elements: List.from(_elements)),
                           size: Size.infinite,
